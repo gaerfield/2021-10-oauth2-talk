@@ -79,34 +79,7 @@ cloud s0ft-fit {
 ```
 
 <!--v-->
-#### veränderter Login Flow
-
-```puml
-Actor "Ich\n(Resource Owner)" as reso
-participant "Postman\n(Client)" as client
-participant "login\n(Authorization Server)" as auth
-participant "github\n(externer Authorization Server)" as gauth
-participant "bankdruecken-history\n(Resource Server)" as ress
-
-reso -> client++ : /login
-client -> auth++ : /login
-auth -> reso++ : bitte einloggen\n**oder social login wählen**
-return einloggen mit github
-auth -> gauth++ : /authorize
-gauth -> reso++ : bitte einloggen
-return Authentifizierung und Autorisierung
-gauth -> gauth : Validierung
-return Access Token + ID Token
-auth -> auth : validiere token
-auth -> auth : finde und synchronisiere Account
-return s0ft-fit Access Token
-client -> ress++ : GET /history\nRequest-Header: s0ft-fit token
-return history
-return history
-```
-
-<!--v-->
-#### weitere Vorteile
+#### Vorteile
 
 * automatische Synchronisation von Account-Informationen aus dem ID-Token
 * verwenden verschiedener Accounts für denselben Account (Account Linking)

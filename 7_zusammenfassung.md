@@ -16,15 +16,11 @@
 ## Fazit I
 
 * niemals selber implementieren
-* Authentifizierung ist eine klassische querschnittliche Aufgabe
-* in verteilten Systemen durch eine eigene Komponente zu (wie bspw. auch Logging, Tracing und Monitoring)
 
 <!--v-->
 ## Fazit II
 
-* selbst dann sinnvoll, wenn die restliche Architektur monolithisch:
-  * Zukunftssicherheit (Monolith leichter zu modularisieren)
+* selbst für monolithische Architekturen sinnvoll:
   * vereinfacht die Architektur (nur permissions werden geprüft)
   * verlagert Sicherheitsrisiken zum Identity Provider
-  * Standard-Konformität erlaubt einfachere Erweiterung auf neue Feature-Requests
-  * kann getrennt voneinander betrieben werden (erhöht Wartbarkeit)
+  * getrennter Betrieb erhöht Wartbarkeit
