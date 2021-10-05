@@ -1,5 +1,5 @@
 ---
-title: reveal-md deployed to gh-pages
+title: Authentifizierung in verteilten Systemen
 separator: <!--s-->
 verticalSeparator: <!--v-->
 theme: solarized
@@ -12,8 +12,12 @@ revealOptions:
   backgroundTransition: 'fade'
 ---
 
-# reveal-md & github-pages
+# Authentifizierung in verteilten Systemen
 
-{{1_getStarted.md}}
-{{2_writing.md}}
-{{3_extras.md}}
+{{1_Einleitung.md}}
+{{2_JWT.md}}
+{{3_oauth.md}}
+{{4_identity-provider.md}}
+{{5_auth-flows.md}}
+{{6_openid_connect.md}}
+{{7_zusammenfassung.md}}
