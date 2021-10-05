@@ -23,6 +23,10 @@
 
 Wie kann in einem verteilten System (z.B. im Fall von Microservices) geprüft werden ob ein Nutzer sich erfolgreich authentifiziert hat.
 
+kurze Antwort: JWT (Json Web Token), OAuth2 (Open Authorization), OpenID (Open IDentification)<!-- .element: class="fragment" data-fragment-index="1" -->
+
+lange Antwort: Fallbeispiel s0ft-fit<!-- .element: class="fragment" data-fragment-index="2" -->
+
 </script></section><section data-markdown><script type="text/template">
 ## Geschichte I
 
@@ -41,13 +45,14 @@ Wie kann in einem verteilten System (z.B. im Fall von Microservices) geprüft we
 
 
 </script></section><section data-markdown><script type="text/template">
-## Startup s0ft-fit
+## Fallbeispiel: Startup s0ft-fit
 
 * 1 Fitnessstudio
-* USP: bieten online Training-Tracker
+* USP: Fitnessgeräte mit integriertem Training-Tracker
 
 > Gehe Trainieren wann immer du willst!
 > Rufe deine Trainings-Historie ab wann immer du willst!
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 </script></section><section data-markdown><script type="text/template">
 ### Architektur
@@ -64,7 +69,7 @@ Wie kann in einem verteilten System (z.B. im Fall von Microservices) geprüft we
 </script></section><section data-markdown><script type="text/template">
 ### Problemstellung
 
-* wir haben expandiert, auf tausende Fitnessstudios
+* wir haben expandiert, auf 116 Fitnessstudios
 * Login und Historie sind unterschiedlich stark frequentiert und sollen unabhängig skalieren um Ressourcen zu sparen
 * Wie überprüft die Historie:
   * zu welchem Nutzer die Anfrage gehört?
@@ -149,7 +154,7 @@ In einem verteilten System **ohne public API** ist eine zentrale Authentifikatio
 ### FitX-App will unsere Daten
 
 * s0ft-fit ist riesig geworden
-* europaweit verteilt, 500 Studios, unzählige Angestellte, eine App
+* europaweit verteilt, über 250 Studios, unzählige Angestellte
 * die Tracker-App FitX möchte unsere Daten in ihre App für statistische Auswertungen integrieren
   * Besser: wir erlauben potentiell allen Fitness-Trackern die Nutzung unserer API um mehr Kunden zu gewinnen. <!-- .element: class="fragment" data-fragment-index="1" -->
 
@@ -283,7 +288,7 @@ Quelle: [wikipedia](https://de.wikipedia.org/w/index.php?title=OAuth&oldid=21270
 <img src='https://g.gravizo.com/svg?@startuml;actor "resource owner" as user;participant "client" as app;participant "authorization server" as auth;participant "resource server" as backend;;user -> app++ : login;app -> auth++ : /authorize\nresponse_type=code\nclient_id;auth -> user++ : redirect zu login\nAutorisierung;return Authentifizierung und Autorisierung;return Authorization Code;app -> auth++ : Anfrage an /oauth/token\nAuthorization Code + Client ID + Client Secret;auth -> auth : validiere Authorization Code\n+ Client ID + Client Secret;return Access Token;app -> backend++ : Anfrage mittels Access Token;return geschützte Resource;return geschützte Resource;@enduml'/>
 
 </script></section><section data-markdown><script type="text/template">
-### Is the Client a Single-Page App oder native App?
+### Single-Page oder native App
 
 * Client Secrets werden per Client (also per App) ausgestellt
 * identisch für alle Nutzer und App-Instanzen
@@ -307,26 +312,10 @@ Quelle: [wikipedia](https://de.wikipedia.org/w/index.php?title=OAuth&oldid=21270
 <img src='https://g.gravizo.com/svg?@startuml;actor "resource owner" as user;participant "client" as app;participant "authorization server" as auth;participant "resource server" as backend;;user -> app++ : login;app -> app : **generiere Code Verifier**\n**und Code Challenge**;app -> auth++ : /authorize\nClient ID & **Code Challenge**;auth -> user++ : redirect zum Login und Autorisierung;return Authentifizierung und Autorisierung;return Authorization Code;app -> auth++ : /access_token\nClient ID, Client Secret,\nAuthorization Code & **Code Verifier**;auth -> auth : validiere Code Verifier\nund Code Challenge;return ID Token und Access Token;app -> backend++ : Anfrage mittels Access Token;return geschützte Resource;return geschützte Resource;@enduml'/>
 
 </script></section><section data-markdown><script type="text/template">
-### falls redirect nicht möglich
-
-* Resource Owner Password Flow
-  * User und Passwort werden in der Applikation eingetragen
-* ist **ausschließlich** dann zu verwenden:
-  * wenn client absolut vertrauenswürdig
-  * redirect-basierte Flows nicht funktionieren
-
-</script></section><section data-markdown><script type="text/template">
-### Resource Owner Password Flow
-
-<img src='https://g.gravizo.com/svg?@startuml;actor "resource owner" as user;participant "client" as app;participant "authorization server" as auth;participant "resource server" as backend;;user -> app++ : login;app -> auth++ : Anfrage an "/oauth/token"\nAuthentifikation mit\nUser und Passwort;auth -> auth : validiere Username\nund Passwort;return Access Token;app -> backend++ : Anfrage mittels Access Token;return geschützte Resource;return geschützte Resource;@enduml'/>
-
-</script></section><section data-markdown><script type="text/template">
 ## Zusammenfassung
 
 * Client Credentials Flow: für M2M-Szenarien
 * Authorization Code Flow (PKCE): für Web und Native Apps
-* Resource Owner Password Flow <!-- .element: class="fragment" data-fragment-index="1" -->
-  * IOT-Geräte mit eigenen Nutzern <!-- .element: class="fragment" data-fragment-index="1" -->
 
 </script></section></section><section ><section data-markdown><script type="text/template">
 ## OpenID
