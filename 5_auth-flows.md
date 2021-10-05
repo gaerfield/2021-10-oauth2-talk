@@ -62,7 +62,7 @@ return geschützte Resource
 ```
 
 <!--v-->
-### Is the Client a Single-Page App oder native App?
+### Single-Page oder native App
 
 * Client Secrets werden per Client (also per App) ausgestellt
 * identisch für alle Nutzer und App-Instanzen
@@ -104,36 +104,7 @@ return geschützte Resource
 ```
 
 <!--v-->
-### falls redirect nicht möglich
-
-* Resource Owner Password Flow
-  * User und Passwort werden in der Applikation eingetragen
-* ist **ausschließlich** dann zu verwenden:
-  * wenn client absolut vertrauenswürdig
-  * redirect-basierte Flows nicht funktionieren
-
-<!--v-->
-### Resource Owner Password Flow
-
-```puml
-actor "resource owner" as user
-participant "client" as app
-participant "authorization server" as auth
-participant "resource server" as backend
-
-user -> app++ : login
-app -> auth++ : Anfrage an "/oauth/token"\nAuthentifikation mit\nUser und Passwort
-auth -> auth : validiere Username\nund Passwort
-return Access Token
-app -> backend++ : Anfrage mittels Access Token
-return geschützte Resource
-return geschützte Resource
-```
-
-<!--v-->
 ## Zusammenfassung
 
 * Client Credentials Flow: für M2M-Szenarien
 * Authorization Code Flow (PKCE): für Web und Native Apps
-* Resource Owner Password Flow <!-- .element: class="fragment" data-fragment-index="1" -->
-  * IOT-Geräte mit eigenen Nutzern <!-- .element: class="fragment" data-fragment-index="1" -->

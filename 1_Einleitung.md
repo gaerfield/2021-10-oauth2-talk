@@ -3,6 +3,10 @@
 
 Wie kann in einem verteilten System (z.B. im Fall von Microservices) geprüft werden ob ein Nutzer sich erfolgreich authentifiziert hat.
 
+kurze Antwort: JWT (Json Web Token), OAuth2 (Open Authorization), OpenID (Open IDentification)<!-- .element: class="fragment" data-fragment-index="1" -->
+
+lange Antwort: Fallbeispiel s0ft-fit<!-- .element: class="fragment" data-fragment-index="2" -->
+
 <!--v-->
 ## Geschichte I
 
@@ -21,13 +25,14 @@ Wie kann in einem verteilten System (z.B. im Fall von Microservices) geprüft we
 
 
 <!--v-->
-## Startup s0ft-fit
+## Fallbeispiel: Startup s0ft-fit
 
 * 1 Fitnessstudio
-* USP: bieten online Training-Tracker
+* USP: Fitnessgeräte mit integriertem Training-Tracker
 
 > Gehe Trainieren wann immer du willst!
 > Rufe deine Trainings-Historie ab wann immer du willst!
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 <!--v-->
 ### Architektur

@@ -5,7 +5,7 @@
 ### FitX-App will unsere Daten
 
 * s0ft-fit ist riesig geworden
-* europaweit verteilt, 500 Studios, unzählige Angestellte, eine App
+* europaweit verteilt, über 250 Studios, unzählige Angestellte
 * die Tracker-App FitX möchte unsere Daten in ihre App für statistische Auswertungen integrieren
   * Besser: wir erlauben potentiell allen Fitness-Trackern die Nutzung unserer API um mehr Kunden zu gewinnen. <!-- .element: class="fragment" data-fragment-index="1" -->
 

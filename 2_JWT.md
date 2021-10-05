@@ -4,7 +4,7 @@
 <!--v-->
 ### Problemstellung
 
-* wir haben expandiert, auf tausende Fitnessstudios
+* wir haben expandiert, auf 116 Fitnessstudios
 * Login und Historie sind unterschiedlich stark frequentiert und sollen unabhängig skalieren um Ressourcen zu sparen
 * Wie überprüft die Historie:
   * zu welchem Nutzer die Anfrage gehört?
