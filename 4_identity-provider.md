@@ -2,16 +2,6 @@
 ## s0ft-fits Identity-provider
 
 <!--v-->
-### Warum nicht selber bauen?
-
-* Risiko und Kosten einer eigenen Implementation zu hoch
-  * Passwörter hashen
-  * Anwendung skalierbar implementieren
-  * Schutz vor Attacken auf Applikationsebene
-  * Schutz gegen Brute-Force und Phishing
-  * und das OAuth2 - Protokoll korrekt implementieren: [RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749) [RFC 6750](https://datatracker.ietf.org/doc/html/rfc6750)<!-- .element: class="fragment" data-fragment-index="1" --> [RFC 7523](https://datatracker.ietf.org/doc/html/rfc7523)<!-- .element: class="fragment" data-fragment-index="2" --> [RFC 7522](https://datatracker.ietf.org/doc/html/rfc7522)<!-- .element: class="fragment" data-fragment-index="3" -->
-
-<!--v-->
 ### Identity Provider
 
 * Authentifikation und Autorisierung sind ein querschnittlicher Belang, entsprechend gibt es fertige Produkte

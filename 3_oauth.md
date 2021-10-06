@@ -75,12 +75,16 @@ return repositories
 ```
 
 <!--v-->
-#### Beispiel Github II
-
-* [Scopes](https://docs.github.com/en/developers/apps/building-oauth-apps/scopes-for-oauth-apps)
-
-<!--v-->
 ### Nächster Schritt
 
-* Kling gut! Wir implementieren OAuth 2
+* Kling gut! Wir implementieren die Login-Komponente als OAuth2-Server
   * Äh ... Nein! Auf gar keinen Fall! <!-- .element: class="fragment" data-fragment-index="1" -->
+
+<!--v-->
+### Warum nicht selber bauen?
+
+* Kosten einer eigenen Implementation zu hoch
+  * gängige Sicherheitsanforderungen berücksichtigen (salted Passworthashes)
+  * Schutz gegen Brute-Force und Phising (zweiter Faktor)
+  * Skalierbarkeit
+  * und das OAuth2 - Protokoll korrekt implementieren: [RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749) [RFC 6750](https://datatracker.ietf.org/doc/html/rfc6750)<!-- .element: class="fragment" data-fragment-index="1" --> [RFC 7523](https://datatracker.ietf.org/doc/html/rfc7523)<!-- .element: class="fragment" data-fragment-index="2" --> [RFC 7522](https://datatracker.ietf.org/doc/html/rfc7522)<!-- .element: class="fragment" data-fragment-index="3" -->
