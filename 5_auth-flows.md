@@ -104,6 +104,33 @@ return geschützte Resource
 ```
 
 <!--v-->
+### falls redirect nicht möglich
+
+* Resource Owner Password Flow
+  * User und Passwort werden in der Applikation eingetragen
+* ist **ausschließlich** dann zu verwenden:
+  * wenn client absolut vertrauenswürdig
+  * redirect-basierte Flows nicht funktionieren
+
+<!--v-->
+### Resource Owner Password Flow
+
+```puml
+actor "resource owner" as user
+participant "client" as app
+participant "authorization server" as auth
+participant "resource server" as backend
+
+user -> app++ : login
+app -> auth++ : Anfrage an "/oauth/token"\nAuthentifikation mit\nUser und Passwort
+auth -> auth : validiere Username\nund Passwort
+return Access Token
+app -> backend++ : Anfrage mittels Access Token
+return geschützte Resource
+return geschützte Resource
+```
+
+<!--v-->
 ## Zusammenfassung
 
 * Client Credentials Flow: für M2M-Szenarien
