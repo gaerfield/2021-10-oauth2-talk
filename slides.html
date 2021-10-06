@@ -204,28 +204,22 @@ Quelle: [wikipedia](https://de.wikipedia.org/w/index.php?title=OAuth&oldid=21270
 <img src='https://g.gravizo.com/svg?@startuml;;Actor "Ich\n(Resource Owner)" as reso;participant "Postman\n(Client)" as client;participant "Github\n(Resource Server)" as ress;participant "Github Auth\n(Authorization Server)" as auth;;reso -> client++ : get repositories;group wenn kein access token vorhanden;client -> auth++ : redirect;auth -> reso++ : bitte einloggen;return username+password;auth -> auth : authentifiziere;auth -> reso++ : Zugriff gewähren für scope "repo"?;return OK;return access-token;end;client -> ress++ : GET /users/gaerfield/repos\nRequest-Header: github-token;return repositories;return repositories;@enduml'/>
 
 </script></section><section data-markdown><script type="text/template">
-#### Beispiel Github II
-
-* [Scopes](https://docs.github.com/en/developers/apps/building-oauth-apps/scopes-for-oauth-apps)
-
-</script></section><section data-markdown><script type="text/template">
 ### Nächster Schritt
 
-* Kling gut! Wir implementieren OAuth 2
+* Kling gut! Wir implementieren die Login-Komponente als OAuth2-Server
   * Äh ... Nein! Auf gar keinen Fall! <!-- .element: class="fragment" data-fragment-index="1" -->
-
-</script></section></section><section ><section data-markdown><script type="text/template">
-## s0ft-fits Identity-provider
 
 </script></section><section data-markdown><script type="text/template">
 ### Warum nicht selber bauen?
 
-* Risiko und Kosten einer eigenen Implementation zu hoch
-  * Passwörter hashen
-  * Anwendung skalierbar implementieren
-  * Schutz vor Attacken auf Applikationsebene
-  * Schutz gegen Brute-Force und Phishing
+* Kosten einer eigenen Implementation zu hoch
+  * gängige Sicherheitsanforderungen berücksichtigen (salted Passworthashes)
+  * Schutz gegen Brute-Force und Phising (zweiter Faktor)
+  * Skalierbarkeit
   * und das OAuth2 - Protokoll korrekt implementieren: [RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749) [RFC 6750](https://datatracker.ietf.org/doc/html/rfc6750)<!-- .element: class="fragment" data-fragment-index="1" --> [RFC 7523](https://datatracker.ietf.org/doc/html/rfc7523)<!-- .element: class="fragment" data-fragment-index="2" --> [RFC 7522](https://datatracker.ietf.org/doc/html/rfc7522)<!-- .element: class="fragment" data-fragment-index="3" -->
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+## s0ft-fits Identity-provider
 
 </script></section><section data-markdown><script type="text/template">
 ### Identity Provider
@@ -310,6 +304,20 @@ Quelle: [wikipedia](https://de.wikipedia.org/w/index.php?title=OAuth&oldid=21270
 ### Authorization Code Flow (PKCE)
 
 <img src='https://g.gravizo.com/svg?@startuml;actor "resource owner" as user;participant "client" as app;participant "authorization server" as auth;participant "resource server" as backend;;user -> app++ : login;app -> app : **generiere Code Verifier**\n**und Code Challenge**;app -> auth++ : /authorize\nClient ID & **Code Challenge**;auth -> user++ : redirect zum Login und Autorisierung;return Authentifizierung und Autorisierung;return Authorization Code;app -> auth++ : /access_token\nClient ID, Client Secret,\nAuthorization Code & **Code Verifier**;auth -> auth : validiere Code Verifier\nund Code Challenge;return ID Token und Access Token;app -> backend++ : Anfrage mittels Access Token;return geschützte Resource;return geschützte Resource;@enduml'/>
+
+</script></section><section data-markdown><script type="text/template">
+### falls redirect nicht möglich
+
+* Resource Owner Password Flow
+  * User und Passwort werden in der Applikation eingetragen
+* ist **ausschließlich** dann zu verwenden:
+  * wenn client absolut vertrauenswürdig
+  * redirect-basierte Flows nicht funktionieren
+
+</script></section><section data-markdown><script type="text/template">
+### Resource Owner Password Flow
+
+<img src='https://g.gravizo.com/svg?@startuml;actor "resource owner" as user;participant "client" as app;participant "authorization server" as auth;participant "resource server" as backend;;user -> app++ : login;app -> auth++ : Anfrage an "/oauth/token"\nAuthentifikation mit\nUser und Passwort;auth -> auth : validiere Username\nund Passwort;return Access Token;app -> backend++ : Anfrage mittels Access Token;return geschützte Resource;return geschützte Resource;@enduml'/>
 
 </script></section><section data-markdown><script type="text/template">
 ## Zusammenfassung
